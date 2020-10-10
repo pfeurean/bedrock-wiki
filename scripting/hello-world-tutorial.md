@@ -103,15 +103,15 @@ Here we disambiguate the four possible meanings of “client” and “server”
 - physical server
   - Often known as the dedicated server, the physical server is the entire program that runs whenever you launch any sort of [bedrock_server.exe](https://www.minecraft.net/en-us/download/server/bedrock) that does not bring up a playable GUI.
 - logical server
-  - The logical server is what runs game logic: mob spawning, weather, updating inventories, health, AI, and all other game mechanics. The logical server is present within the physical server, but is also can run inside a physical client together with a logical client, as a single player world. The logical server always runs in a thread named the Server Thread.
+  - The logical server is what runs game logic: mob spawning, weather, updating inventories, health, AI, and all other game mechanics. The logical server is present within the physical server, but may also run inside a physical client together with a logical client, as a single player world. The logical server always runs in a thread named the Server Thread.
 - logical client
   - The logical client is what accepts input from the player and relays it to the logical server. In addition, it also receives information from the logical server and makes it available graphically to the player. The logical client runs in the Client Thread, though often several other threads are spawned to handle things like audio and chunk render batching.
 
-Our `clientScript.js` will run within the logical client and will handle most things that interact with the visual world that a player may see through their physical client.
-Our `serverScript.js` will run within the logical server and do most of the heavy lifting for your larger packs.
+Our `clientScript.js` will run within the logical client. It will handle most things that interact with the player's visual world through their physical client.
+Our `serverScript.js` will run within the logical server. It will do most of the heavy lifting for your larger packs.
 Most code will be written here because it is the safest (and sometimes the only) way to get certain things done.
 
-For instance, we don't want to let just anybody be able to write code in their own client script that lets them know exactly where all players are in the world (e.g. in PvP matches) or lets them fly/teleport all over the place at will.
+For instance, we don't want to anybody to be able to write code their own client script enabling them to know the location of all players (e.g. in PvP matches) or allow them to fly/teleport at will.
 Only the server script can do those things, which makes sense because the server script is the most trusted resource in an addon. It knows all and does all.
 
 ## manifest.json
